@@ -1,0 +1,1375 @@
+<!doctype html >
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SampleStart</title>
+  <link rel="stylesheet" src="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/prescriptionbox.css" rel="stylesheet">
+  <!-- <script type="text/javascript" src="js/play.js"></script> -->
+  <script src="js/jquery-3.1.0.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+  <script type="text/javascript" src="js/jquery.flip.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+  $(function(){
+        var currentState="ram";
+        var flipdeck=[];
+        var ramdeck=["ram_card_1","ram_card_2","ram_card_3"];
+        var procdeck=["proccard_1","proccard_2","proccard_3","proccard_4"];
+        var mobodeck=["mobocard_1","mobocard_2","mobocard_3","mobocard_4"];
+        var prebdeck=["prebCard1","prebCard2"];
+        var cardNames=[];
+        var flipCard = function(id,x_coor, y_coor, type,locked) {
+            this.name=id;
+            this.x=x_coor;
+            this.y=y_coor;
+            this.type= type;
+            this.locked=false;
+        };
+        function getIndex(name){
+          for (i =0, len =flipdeck.length; i <len;i++){
+              if(name==flipdeck[i].name){
+                  return i;
+              }
+          }
+        }
+
+        function getCard(name){
+              for (i =0, len=flipdeck.length; i <len;i++){
+                  if(name==flipdeck[i].name){
+                      return flipdeck[i];
+                  }
+              }
+        }
+        $(document).ready(function(){
+            $(".back").css({"z-index":"-5"});
+            // alert("bye");
+            addCards(flipdeck);
+            // alert("hi");
+            return flipdeck;
+        });
+        function hide_this_class(hidingthis, className){
+          for ( i =0,len= hidingthis.length;i<len;i++){
+              $("#"+hidingthis[i]).addClass(className);
+          }
+        }
+        function show_this_class(hidingthis, className){
+          for ( i =0,len=hidingthis.length;i<len;i++){
+              $("#"+hidingthis[i]).removeClass(className);
+          }
+        }
+        function hide_their_children(hidingthis){
+          var d = document.getElementById(hidingthis).children;
+          for( var i =0, len=d.length; i<len;i++){
+              // console.log("..."+d[i].id);
+              if(d[i].id.includes(card)){
+                $("#"+(d[i]).id).addClass('hidethis');
+                    // return(d[i]).id;
+              }
+          }
+        }
+        function hide_current(current){
+            // alert(current);
+            switch(current){
+                  case "ram":
+                      hide_this_class(ramdeck, 'hidethis');
+                      break;
+                  case "mobo":
+                      hide_this_class(mobodeck, 'hidethis');
+                      break;
+                  case "proc":
+                      hide_this_class(procdeck, 'hidethis');
+                      break;
+                  case "prebuilt":
+                      hide_this_class(prebdeck, 'hidethis');
+                      break;
+            }
+        }
+        function show_current(current){
+            // alert(current);
+            switch(current){
+                  case "ram":
+                      show_this_class(ramdeck, 'hidethis');
+                      break;
+                  case "mobo":
+                      show_this_class(mobodeck, 'hidethis');
+                      break;
+                  case "proc":
+                      show_this_class(procdeck, 'hidethis');
+                      break;
+                  case "prebuilt":
+                      show_this_class(prebdeck, 'hidethis');
+                      break;
+            }
+        }
+        function show_their_children(hidingthis){
+          var d = document.getElementById(hidingthis).children;
+          for( var i =0, len = d.length; i<len;i++){
+              // console.log("..."+d[i].id);
+              if(d[i].id.includes(card)){
+                $("#"+(d[i]).id).removeClass('hidethis');
+                    // return(d[i]).id;
+              }
+          }
+        }
+        $(".card").hover(function(){
+            show_this_class(["dragbox"],"hidethis")},
+            function(){
+            hide_this_class(["dragbox"],"hidethis")}
+
+        );
+        $(".card").draggable({addClasses:false, cursor:'move',
+          revert : function(event, ui) {
+
+            var temp=document.getElementById("dragbox");
+            if (!($("#dragbox")).hasClass("hidethis")){
+                hide_this_class(["dragbox"],"hidethis");
+            }
+            $(this).data("uiDraggable").originalPosition = {
+                top : 0,
+                left : 0
+            };
+            // return boolean
+            return !event;},drag:function(event,ui){
+            var temp= document.getElementById("dragbox");
+            if ($("#dragbox").hasClass("hidethis")){
+                show_this_class(["dragbox"],"hidethis");
+            }
+
+        }});
+        function addCards(flipdeck){
+          var t= document.getElementsByClassName("card");
+            for (var i=0, ii=t.length; i<ii;i++){
+              var offset = $(t[i]).offset();
+              var type = "";
+              if (t[i].id.includes("mobo")){
+                  type="mobo";
+              }
+              else if (t[i].id.includes("preb")){
+                  type="preb";
+              }
+              else if (t[i].id.includes("ram")){
+                  type="ram";
+              }
+              else if (t[i].id.includes("proc")){
+                  type="proc";
+              }
+              else{
+                  type="na";
+              }
+              // alert(t[i].id+".."+type);
+              var a = new flipCard(t[i].id,offset.left, offset.top, type,false);
+              flipdeck.push(a);
+              console.log("new card added!");
+              console.log(a.name+"("+a.x+","+a.y+")");
+          }
+        }
+        function checkInfo(parent,id){
+
+          console.log("checkInfo(): "+parent);
+          var d=document.getElementById(parent).getElementsByClassName(id)[0].innerHTML;
+          if (document.getElementById(id).innerHTML==d){
+              console.log("no changes necessary");
+              return true;
+          }
+          else{
+              return false;
+          }
+        }
+        function copyInfo(parent, childId){
+
+          if (hasChildren(document.getElementById(parent),childId)){
+            // console.log("class "+childId+" DOES exist");
+            var d=document.getElementById(parent).getElementsByClassName(childId)[0].innerHTML;
+            document.getElementById(childId).innerHTML=d;
+          }
+          else{
+            console.log("class "+childId+" does not exist");
+          }
+        }
+        function copyPrebs(t){
+          //name
+            copyInfo(t,'makeInfo');
+          //processor
+            copyInfo(t,'processorSKU');
+            copyInfo(t,'processorSpeed');
+          //memory
+            copyInfo(t,'ramCap');
+            copyInfo(t,'ramSpeed');
+          //storage
+            copyInfo(t,'hardDrive1');
+            copyInfo(t,'hardDrive2');
+            copyInfo(t,'hardDrive3');
+          //ports
+            copyInfo(t,'usb31');
+            copyInfo(t,'usb3');
+            copyInfo(t,'usb2');
+          //price
+            copyInfo(t,'priceValue');
+
+            var temp = document.getElementById("staticComputer");
+            console.log(temp);
+            hide_this_class(["hardDrive1","ramCap","ramSpeed", "processorSKU", "processorSpeed", "makeInfo","usb31", "usb3","usb2"],"green");
+        }
+        function copyProc(t){
+            //make
+            copyInfo(t,'makeInfo');
+            //SKU
+            if (!checkInfo(t,'processorSKU')){
+            copyInfo(t,'processorSKU');
+            copyInfo(t,'processorSpeed');
+            }
+            //speed
+        }
+        function increasePrice(t){
+          if (!getCard(t).locked){
+            d=document.getElementById(t).getElementsByClassName('priceValue')[0].innerHTML;
+            var temp = document.getElementById('priceValue').innerHTML;
+            console.log("increasing price by "+ parseFloat(d));
+            hide_this_class(['priceValue'],"green");
+            document.getElementById('priceValue').innerHTML= parseFloat(d)+parseFloat(temp);
+          }
+        }
+        function hasChildren(nodeList, childName){
+            var yes = false;
+            if(nodeList.className.includes(childName)){
+                yes=true;
+                return true;
+            }
+            else if (nodeList.children.length ==0){
+                yes=false;
+                return false;
+            }
+            else{
+              for (var i = 0, childrenLength = nodeList.children.length; i<childrenLength;i++){
+                  yes=hasChildren(nodeList.children[i],childName);
+                  if (yes){
+                      return true;
+                  }
+              }
+            }
+            return false;
+        }
+        function addOne(el){
+          var t = document.getElementById('ccount').innerHTML;
+          var temporary = el[0].className;
+          document.getElementById('ccount').innerHTML= parseInt(t)+1;
+          // console.log(el[0].id);
+
+          //if locked... do nothing
+          //if unlocked..... add
+                //check for type
+                //if different info, add
+                //if same, reject (add rejection message?);
+          if (getCard(el[0].id).locked==false){
+              if (temporary.includes("ram")){
+                console.log("dropped ram card");
+                if (!checkInfo(el[0].id,"ramSpeed") || (!checkInfo(el[0].id,"ramCap"))){
+                  var d = document.getElementById(el[0].id).childNodes;
+                  hide_this_class([getChildrenId(el[0].id,"front"),getChildrenId(el[0].id,"back")],"glow");
+                  hide_this_class(['ramCap','ramSpeed'],"green");
+                  // hide_this_class([getChildrenId(el[0].id,"back")],"glow");
+                  increasePrice(el[0].id);
+                  copyInfo(el[0].id,'ramCap');
+                  copyInfo(el[0].id,'ramSpeed');
+                }
+                else{
+                  $("#"+el[0].id).css("left",0);
+                  $("#"+el[0].id).css("top",0);
+                  show_this_class([getChildrenId(el[0].id,"front"),getChildrenId(el[0].id,"back")],"glow");
+                  show_this_class(['ramCap','ramSpeed'],"green");
+
+                  // show_this_class(['priceValue'],"glow");
+                  alert("*ALERT* you have already added that part");
+              }
+
+              // copyInfo(el[0].id,'ramCap');
+              // copyInfo(el[0].id,'ramSpeed');
+            }
+            else if (temporary.includes("mobo")){
+              console.log("dropped mobo card");
+              copyInfo(el[0].id,"usb31");
+              copyInfo(el[0].id,"usb3");
+              copyInfo(el[0].id,"usb2");
+              hide_this_class(['usb31','usb3','usb2'],"green");
+              increasePrice(el[0].id);
+
+
+
+            }
+            else if (temporary.includes("prebuilt")){
+              console.log("dropped prebuilt card");
+              copyPrebs(el[0].id);
+            }
+            else if (temporary.includes("proc")){
+              console.log("dropped processor card");
+              copyProc(el[0].id);
+              increasePrice(el[0].id);
+              hide_this_class(['processorSKU','processorSpeed'],"green");
+
+            }
+
+          }
+          var d =document.getElementById(el[0].id);
+          console.log(d);
+        }
+        function getChildrenId(id, childName){
+            var d = document.getElementById(id).children;
+            for( var i =0, len = d.length; i<len;i++){
+                // console.log("..."+d[i].id);
+                if(d[i].id.includes(childName)){
+                      return(d[i]).id;
+                }
+            }
+
+        }
+        $( ".dropbox" ).droppable({
+          drop: function(event,ui) {
+          lockHelper(event,ui);
+          // addOne(ui.helper);
+          }
+          });
+        function opentab(e){
+            var t =e.target.id;
+            // alert(e.target.id);
+            // console.log(e.value);
+            var part = document.getElementById("subButton");
+            // var build = document.getElementById("jprebuilt");
+            var mobo = document.getElementById("jpart");
+
+            var rView = document.getElementById("ramView");
+            var pView = document.getElementById("preView");
+            var procView = document.getElementById("processorView");
+            var mobView = document.getElementById("moboView");
+            var prev =currentState;
+            switch (t){
+              case "prebButton":
+                currentState="preb";
+
+                hide_this_class(["moboView","processorView","ramView"],"hidethis");
+                show_this_class(["preView","prebCard1", "prebCard2"], "hidethis");
+                break;
+              case "partsButton":
+                  // currentState="preb";
+                  if ($("#subButton").hasClass('hidethis')){
+                    show_this_class(["subButton"], "hidethis");
+                  }
+                  else{
+                    hide_this_class(["subButton"],"hidethis");
+                  }
+                  break;
+              case "procButton":
+                  currentState="proc";
+                  show_this_class(["processorView"],"hidethis");
+                  hide_this_class(["preView","moboView","ramView"],"hidethis");
+                  break;
+              case "moboButton":
+                currentState="mobo";
+                show_this_class(["moboView"],"hidethis");
+                hide_this_class(["preView","processorView","ramView"],"hidethis");
+                break;
+              case "ramButton":
+                currentState="ram";
+                show_this_class(["ramView"],"hidethis");
+                hide_this_class(["preView","processorView","moboView"],"hidethis");
+                break;
+              // case "hddButton":
+              //   currentState="hdd";
+              //   show_this_class(["hddView"],"hidethis");
+              //   hide_this_class(["preView","processorView","moboView"],"hidethis");
+              //   break;
+              default:
+                currentState="";
+                console.log("no value found");
+                break;
+            }
+
+            if (currentState==""&&currentState==prev){
+                //do nothing
+            }
+            else{
+              var l=t+"Li";
+              var j=t+"Li";
+              console.log("currentState:"+l+",prevState:"+j);
+              hide_this_class([l],"active");
+              show_this_class([j],"active");
+              console.log("ACTIVE CLASS ADDED AND REMOVED");
+              show_current(currentState);
+              hide_current(prev);
+            }
+          console.log(currentState);
+          }
+
+        function attributeHelper(type){
+            switch(type){
+                  case "ram":
+                    return ["ramCap", "ramSpeed"];
+                    break;
+                  case "proc":
+                    return ["processorSKU", "processorSpeed"];
+                    break;
+                  case "mobo":
+                    return ["ramType","ramSpeed","usb31", "usb3", "usb2"];
+                    break;
+                  case "hdd":
+                    return ["hardDrive1", "hardDrive2", "hardDrive3"];
+                    break;
+                  case "preb":
+                    return ["hardDrive1","ramCap","ramSpeed", "processorSKU", "processorSpeed", "makeInfo","usb31", "usb3","usb2"];
+
+                    break;
+                  default:
+                      break;
+
+            }
+        }
+        function bounce(current, index){
+          // if(current.locked&&current.type!=currentState){
+          //
+          //   show_this_class(attributeHelper(current.type),"green");
+          //
+          // }
+          // alert(current.locked+"."+current.type+"."+currentState);
+          if (current.locked && current.type == currentState ){
+            console.log("returning "+ current.name+" to original location1");
+            $("#"+current.name).css("left",0);
+            $("#"+current.name).css("top",0);
+            //removes class
+            show_this_class([getChildrenId(current.name,"front"),getChildrenId(current.name,"back")],"glow");
+            show_this_class(['priceValue'],"green");
+
+            if(!current.name.includes("prebCard")){
+              d=document.getElementById(current.name).getElementsByClassName('priceValue')[0].innerHTML;
+              var temp = document.getElementById('priceValue').innerHTML;
+              console.log("subtracting price by "+ parseFloat(d));
+              hide_this_class(['priceValue'],"green");
+              document.getElementById('priceValue').innerHTML= parseFloat(temp)-parseFloat(d);
+            }
+            flipdeck[index].locked=false;
+            }
+        }
+
+        function lockHelper(event,ui){
+            for( var i=0, len =flipdeck.length; i<len;i++){
+              var current=flipdeck[i];
+              console.log(current.name + ".."+ current.locked);
+              switch(current.name){
+                  case ui.helper[0].id:
+                      addOne(ui.helper);
+                      flipdeck[i].locked=true;
+                      break;
+                  case "customCard":
+                      break;
+                  default:
+                      bounce(current, i);
+                      break;
+              }
+
+            }
+        }
+
+        // $('#moboButton, #hddButton , #partsButton , #prebButton,ramButton').on("click", opentab,false);
+        var t = document.querySelector("#menu");
+        t.addEventListener("click", opentab, true);
+        // function eventer(e){
+        //
+        //     console.log(e.target.id);
+        // }
+        $( "#partButton" ).click(function() {
+          // alert("handler for .click() called");
+          $( ".sub" ).show( "bounce",( { times: 1 }, "slow" ),500);
+        });
+        $(".card").flip({'trigger':'click'});
+        $(".card").on('flip:done',function(){
+          var f = $(this).data("flip-model");
+          if (f.isFlipped){
+            $(this).flip({reverse: true});
+          }
+          else{
+            $(this).flip({reverse: false});
+          }});
+
+        });
+
+  </script>
+  <style>
+    .MainView{
+      position:fixed;
+      float:left;
+      margin-top:6%;
+      margin-left:13%;
+      margin-right:5%;
+      width: 59%;
+      height: 427px;
+      z-index: -10;
+      background-image:url("images/brushedmetal.jpg");
+      border-style:ridge;
+    }
+
+    .view{
+      z-index: -8;
+      margin-top:5px;
+      margin-left:5px;
+      background: rgba(255,0,222, 0.2);
+      width:99%;
+      height: 410px;
+    }
+    #preView{
+      z-index: -8;
+      background: rgba(255,0,222, 0.2);
+      height:400px;
+      /*display:none;*/
+    }
+    a.buttonBar{
+      width:inherit;%;
+    }
+    .staticmenu{
+    position:fixed;
+    /*background-color: grey;*/
+    width:13%;
+    height:70%;
+    margin-top:6%;
+    /*margin-left:5%;*/
+    }
+    .card {
+        float:left;
+        width: 200px;
+        height: 300px;
+        margin: 20px;
+      }
+    .front{
+      color:white;
+      text-align: center;
+      font-size: 25px;
+      background-size:auto;
+
+    }
+    #prebuilt{
+       padding-top:30px;
+       color:white;
+    }
+    .textsupport{
+        color:white;
+        font-size: 30px;
+    }
+    .front, .back {
+        background-image: url("images/monogreybackground.jpg");
+        border-radius: 10px 50px 15px;
+        background-repeat:no-repeat;
+        /*text-shadow: 0 0 10px rgba(255,255,255,1) , 0 0 20px rgba(255,255,255,1) , 0 0 30px rgba(255,255,255,1) , 0 0 40px #ff00de , 0 0 70px #ff00de , 0 0 80px #ff00de , 0 0 100px #ff00de ;*/
+
+        border: 3px gray solid;
+        padding: 10px;
+    }
+    .back{
+        background-size: cover;
+        backface-visibility: hidden;
+        color:white;
+    }
+    #toprow{
+      padding-top:10px;
+    }
+    #label{
+      padding-top:10px;
+      color: white;
+      text-shadow: red 0.2em 0.1em 0.2em;
+      font-weight: bolder;
+    }
+    .staticComputer{
+      position: absolute;
+      background: url("images/monogreybackground.jpg");
+      width: 340px;
+      height: 430px;
+      /*margin: 20px;*/
+      top: 0px;
+      left: 1000px;
+      border-style: inset;
+    }
+    .center-drag-text{
+        text-shadow: 0 0 10px rgba(255,255,255,1) , 0 0 20px rgba(255,255,255,1) , 0 0 30px rgba(255,255,255,1) , 0 0 40px #ff00de , 0 0 70px #ff00de , 0 0 80px #ff00de , 0 0 100px #ff00de ;
+        font-weight: bolder;
+        margin-top:30px;
+        font-size: 60px;
+        color: grey;
+        text-align: center;
+    };
+
+    .staticValue{
+
+      margin-top: 30px;
+      margin-left:150px;
+      color: red;
+      font-size: 30px;
+    }
+    .info{
+        color: white;
+        z-index:5;
+        padding-left:5px;
+        padding-top:10px;
+    }
+    #brand{
+        padding-top:20px;
+        width: inherit;
+        background-size: cover;
+    }
+    #lol, #cbrand, #clol{
+      padding-top:20px;
+      width: inherit;
+      background-size: cover;
+    }
+    #price, #cprice{
+      padding-top:20px;
+      text-align: center;
+      color:red;
+      font-size: 40px;
+      font-weight: bolder;
+    }
+    .col-sm-6, .col-md-6{
+        padding-right:5px;
+        padding-left:0px;
+    }
+    .dropbox{
+      border-style: inset;
+      position:relative;
+      top:30px;
+      /*right: 30px;*/
+      bottom: 10px;
+      background-image: url("images/brushedmetal.jpg");
+      z-index: -30;
+      height:100px;
+      width: auto;
+    }
+    #cbox, #ccount{
+      text-align: right;
+      right:60px;
+      margin-right: 60px;
+    }
+    #customCard{
+      float:right;
+      position:absolute;
+      right:-2%;
+    }
+    .pCard{
+      float:left;
+      width: 340px;
+      height: 430px;
+      margin: 20px;
+    }
+    .pcss{
+        margin-top:60px;
+    }
+    .hidethis {
+      overflow: hidden;
+      height: 1px; width: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+      clip: rect(0 0 0 0);
+      position: absolute;
+    }
+    .glow{
+        border: 3px #d9ffb3 solid;
+
+        border: 3px #ff00de solid;
+        text-shadow: 0 0 10px rgba(255,255,255,1) , 0 0 20px rgba(255,255,255,1) , 0 0 30px rgba(255,255,255,1) , 0 0 40px #669900 , 0 0 70px #669900 , 0 0 80px #669900 , 0 0 100px #669900 ;
+    }
+    .green{
+        color:green;
+    }
+    .row{
+      margin-left:3%;
+    }
+    .jct{
+        position:fixed;
+        height:10%;
+        display:block;
+        width:100%;
+    }
+    .jctlogo{
+        top:20px;
+        left:1400px;
+        font-size:30px;
+        font-style: italic;
+        font-family: cursive;
+    }
+    .jctlogo, .jctlogo2{
+      text-align:right;
+      position: absolute;
+      display: inline;
+    }
+    .jctlogo2{
+        font-size:15px;
+        top: 60px;
+        left:1370px;
+        font-weight:bolder;
+        font-style: italic;
+    }
+  </style>
+
+
+</head>
+<body>
+<div id="menu" class="staticmenu">
+  <!-- <div class="btn-group" id="OPTIONS"> -->
+
+  <ul class= "nav nav-pills nav-stacked">
+    <li id="prebButtonLi" role="navigation" class="active">
+      <a class="buttonBar" id="prebButton">Prebuilt</a>
+      <!-- <input id="prebButton" class="btn btn-primary btn-lg" type="button" value ="Prebuilt" ></input> -->
+    </li>
+    <li id="partsButtonLi"role="navigation">
+      <a class="buttonBar" id="partsButton">Parts</a>
+
+      <!-- <input class="btn btn-primary btn-lg" id="partsButton"type="button" value ="Parts" ></input> -->
+    </li>
+    <li id="procButtonLi"role="navigation" >
+      <a class="buttonBar"id="procButton">Processors</a>
+      <!-- <input id="procButton" class="btn btn-info btn-md sub" type="button" value ="Processors" ></input> -->
+    </li>
+    <li id="moboButton"role="navigation">
+        <a class="buttonBar"id="moboButton">Motherboards</a>
+      <!-- <input id="moboButton" class="btn btn-info btn-md sub" type="button" value ="Motherboards" ></input> -->
+    </li>
+    <li id="hddButtonLi"role="navigation">
+        <a class="buttonBar" id="hddButton">Storage</a>
+      <!-- <input id="hddButton" class="btn btn-info btn-md sub" type="button" value ="Storage" ></input> -->
+    </li>
+</ul>
+<!-- </div> -->
+</div>
+
+<div class="jct">
+  <div class="jctlogo">jCT</div>
+  <div class="jctlogo2">Jon's Comparison Tool</div>
+  </div>
+<div class="MainView">
+    <div id="ramView" class="view">
+      <div id="ram_card_1" class="card ram">
+        <div id="frontcard" class="front">
+          <div class="brandvalue" id="brand">G.Skill</div>
+          <div class="ramCap" id="lol">16 Gb DDR3</div>
+          <div class="priceValue" id="price">67.99</div>
+        </div>
+        <div id="backcard" class="back">
+          <div class= "row" id=toprow>
+            <div id="label" class="info-label col-sm-6 col-md-6">Type</div>
+            <div class = "col-sm-6 col-md-6">
+              <div class="info">16 Gb DDR3 (2x8)</div>
+              </div>
+
+            </div>
+          <div class= "row">
+            <div id="label" class="info-label col-sm-6 col-md-6">Speed</div>
+            <div class = "col-sm-6 col-md-6">
+              <div class="ramSpeed info">1600 Mhz</div>
+            </div>
+          </div>
+          <div class= "row">
+            <div id="label"  class="info-label col-sm-6 col-md-6">Timing</div>
+              <div class = "col-sm-6 col-md-6">
+                <div class="info">9-9-9-9</div>
+                </div>
+
+            </div>
+          <div class= "row">
+              <div id="label" class="info-label col-sm-6 col-md-6">Latency</div>
+                <div class = "col-sm-6 col-md-6">
+                  <div class="info">9 ms</div>
+                </div>
+              </div>
+        </div>
+        </div>
+      <div id="ram_card_2" class="ram card">
+        <div id="frontcard2" class="front">
+          <div class="brandvalue"id="brand">G.Skill</div>
+          <div class="ramCap" id="lol">16 Gb DDR4</div>
+          <div class="priceValue" id="price">79.99</div>
+        </div>
+        <div id="backcard2" class="back">
+        <div class= "row" id=toprow>
+        <label id="label" class="info-label col-sm-6 col-md-6">Type</label>
+            <div class = "col-sm-6 col-md-6">
+               <label class="info">DDR4 (2x8)</label>
+            </div>
+        </div>
+        <div class= "row">
+          <label id="label" class="info-label col-sm-6 col-md-6">Speed</label>
+            <div class = "col-sm-6 col-md-6">
+                <label class="ramSpeed info">3200 Mhz</label>
+            </div>
+          </div>
+        <div class= "row">
+            <div id="label"  class="info-label col-sm-6 col-md-6">Timing</div>
+                  <div class = "col-sm-6 col-md-6">
+                    <div class="info">16-16-16-36</div>
+                  </div>
+            </div>
+        <div class= "row">
+              <div id="label"  class="info-label col-sm-6 col-md-6">Latency</div>
+                <div class = "col-sm-6 col-md-6">
+                    <div class="info">16 ms</div>
+                </div>
+              </div>
+          </div>
+
+          </div>
+
+      <div id="ram_card_3" class="ram card">
+        <div id="frontcard3" class="front">
+          <div class="brandvalue" id="brand" >G.Skill</div>
+          <div class="ramCap" id="lol" >16 Gb DDR4</div>
+          <div class="priceValue" id="price" >66.99</div>
+          </div>
+        <div id="backcard3" class="back">
+          <div class= "row" id=toprow>
+            <div id="label" class="info-label col-sm-6 col-md-6">Type</div>
+                <div class = "col-sm-6 col-md-6">
+                  <div class="ramCap info" >16Gb DDR4 (2x8)</div>
+                </div>
+            </div>
+          <div class= "row">
+            <div id="label" class="info-label col-sm-6 col-md-6">Speed</div>
+              <div class = "col-sm-6 col-md-6">
+                  <div class="ramSpeed info">2400 Mhz</div>
+              </div>
+            </div>
+          <div class= "row">
+              <div id="label"  class="info-label col-sm-6 col-md-6">Timing</div>
+                  <div class = "col-sm-6 col-md-6">
+                      <div class="info">15-15-15-35</div>
+                    </div>
+            </div>
+          <div class= "row">
+                <div id="label"  class="info-label col-sm-6 col-md-6">Latency</div>
+                  <div class = "col-sm-6 col-md-6">
+                      <div class="info">15 ms</div>
+                  </div>
+                </div>
+          </div>
+          </div>
+
+        </div>
+  <div id="processorView" class="hidethis view">
+    <div id="proccard_1" class="card proc">
+      <div id="frontproc_1" class="front">
+          <div class="brandvalue" id="brand">Intel</div>
+          <div class="processorSKU">Core i5 6400</div>
+          <div class="processorSpeed">Skylake 2.7 Ghz</div>
+          <div class="priceValue" id="price">189.99</div>
+        </div>
+      <div id="backproc_1" class="back">
+          <div class= "row" id=toprow>
+              <div id="label" class="info-label col-sm-6 col-md-6">ChipMaker</div>
+            <div class = "col-sm-6 col-md-6">
+              <div class="makeInfo info">Intel</div>
+              </div>
+          </div>
+          <div class= "row">
+            <div id="label" class="info-label col-sm-6 col-md-6">SKU</div>
+            <div class = "col-sm-6 col-md-6">
+            <div class="processorSKU info">Core i5 6400</div>
+              </div>
+            </div>
+          <div class= "row">
+            <div id="label"  class="info-label col-sm-6 col-md-6">Speed</div>
+            <div class = "col-sm-6 col-md-6">
+            <div class="processorSpeed info">Skylake 2.7 Ghz</div>
+              </div>
+            </div>
+          <div class= "row">
+              <div id="label" class="info-label col-sm-6 col-md-6">Socket</div>
+                <div class = "col-sm-6 col-md-6">
+                  <div class="socketValue info">LGA 1151</div>
+                </div>
+              </div>
+            </div>
+          </div>
+    <div id="proccard_2" class="card proc">
+            <div id="frontproc_2" class="front">
+                <div class="brandvalue" id="brand">Intel</div>
+                <div class="processorSKU">Core i5 6500</div>
+                <div class="processorSpeed">Skylake 3.2 Ghz</div>
+                <div class="priceValue" id="price">204.99</div>
+              </div>
+            <div id="backproc_2" class="back">
+                <div class= "row" id=toprow>
+                  <div id="label" class="info-label col-sm-6 col-md-6">ChipMaker</div>
+                  <div class = "col-sm-6 col-md-6">
+                    <div class="makeInfo info">Intel</div>
+                    </div>
+
+                  </div>
+                <div class= "row">
+                  <div id="label" class="info-label col-sm-6 col-md-6">SKU</div>
+                  <div class = "col-sm-6 col-md-6">
+                    <div class="processorSKU info">Core i5 6500</div>
+                  </div>
+                </div>
+                <div class= "row">
+                  <div id="label"  class="info-label col-sm-6 col-md-6">Speed</div>
+                    <div class = "col-sm-6 col-md-6">
+                      <div class="processorSpeed info">Skylake 3.2 Ghz</div>
+                      </div>
+
+                  </div>
+                <div class= "row">
+                    <div id="label" class="info-label col-sm-6 col-md-6">Socket</div>
+                      <div class = "col-sm-6 col-md-6">
+                        <div class="socketValue info">LGA 1151</div>
+                      </div>
+                    </div>
+
+              </div>
+              </div>
+    <div id="proccard_3" class="card proc">
+        <div id="frontproc_3" class="front">
+            <div class="brandvalue" id="brand">Intel</div>
+            <div class="processorSKU">Core i5 6600K</div>
+            <div class="processorSpeed">Skylake 3.5 Ghz</div>
+            <div class="priceValue" id="price">249.99</div>
+          </div>
+        <div id="backproc_3" class="back">
+            <div class= "row" id=toprow>
+              <div id="label" class="info-label col-sm-6 col-md-6">ChipMaker</div>
+              <div class = "col-sm-6 col-md-6">
+                <div class="makeInfo info">Intel</div>
+                </div>
+
+              </div>
+            <div class= "row">
+              <div id="label" class="info-label col-sm-6 col-md-6">SKU</div>
+              <div class = "col-sm-6 col-md-6">
+                <div class="processorSKU info">Core i5 6600K</div>
+              </div>
+            </div>
+            <div class= "row">
+              <div id="label"  class="info-label col-sm-6 col-md-6">Speed</div>
+                <div class = "col-sm-6 col-md-6">
+                  <div class="processorSpeed info">Skylake 3.5 Ghz</div>
+                  </div>
+              </div>
+            <div class= "row">
+                <div id="label" class="info-label col-sm-6 col-md-6">Socket</div>
+                  <div class = "col-sm-6 col-md-6">
+                    <div class="socketValue info">LGA 1151</div>
+                  </div>
+                </div>
+          </div>
+          </div>
+    <div id="proccard_4" class="card proc">
+            <div id="frontproc_4" class="front">
+                <div class="brandvalue" id="brand">Intel</div>
+                <div class="processorSKU">Core i7 6700K</div>
+                <div class="processorSpeed">Skylake 4.0 Ghz</div>
+                <div class="priceValue" id="price">349.99</div>
+              </div>
+            <div id="backproc_4" class="back">
+                <div class= "row" id=toprow>
+                  <div id="label" class="info-label col-sm-6 col-md-6">ChipMaker</div>
+                  <div class = "col-sm-6 col-md-6">
+                    <div class="makeInfo info">Intel</div>
+                    </div>
+
+                  </div>
+                <div class= "row">
+                  <div id="label" class="info-label col-sm-6 col-md-6">SKU</div>
+                  <div class = "col-sm-6 col-md-6">
+                    <div class="processorSKU info">Core i7 6700K</div>
+                  </div>
+                </div>
+                <div class= "row">
+                  <div id="label"  class="info-label col-sm-6 col-md-6">Speed</div>
+                    <div class = "col-sm-6 col-md-6">
+                      <div class="processorSpeed info">Skylake 4.0 Ghz</div>
+                      </div>
+
+                  </div>
+                <div class= "row">
+                    <div id="label" class="info-label col-sm-6 col-md-6">Socket</div>
+                      <div class = "col-sm-6 col-md-6">
+                        <div class="socketValue info">LGA 1151</div>
+                      </div>
+                    </div>
+
+              </div>
+              </div>
+
+
+  </div>
+  <div id="moboView" class="hidethis view">
+    <div id="mobocard_1" class="card mobo">
+      <div id="frontmobo_1" class="front">
+          <div class="brandvalue" id="brand">ASROCK</div>
+          <div class="moboSKU">Z170 Pro4</div>
+          <div class="priceValue" id="price">99.99</div>
+        </div>
+      <div id="backmobo_1" class="back">
+          <div class= "row" id=toprow>
+              <div id="label" class="info-label col-sm-6 col-md-6">Brand</div>
+            <div class = "col-sm-6 col-md-6">
+              <div class="moboMaker info">ASRock</div>
+              </div>
+          </div>
+          <div class= "row">
+            <div id="label" class="info-label col-sm-6 col-md-6">SKU</div>
+            <div class = "col-sm-6 col-md-6">
+            <div class="moboSKU info">Z170 Pro4</div>
+              </div>
+            </div>
+            <div class= "row">
+              <div id="label" class="info-label col-sm-6 col-md-6">Type</div>
+              <div class = "col-sm-6 col-md-6">
+                <div class="ramType info">supports DDR4</div>
+                </div>
+
+              </div>
+          <div class= "row">
+            <div id="label"  class="info-label col-sm-6 col-md-6">Mem Speed</div>
+            <div class = "col-sm-6 col-md-6">
+            <div class="ramSpeed info">up to 3400 Mhz</div>
+              </div>
+            </div>
+            <div class= "row">
+              <label id="label" class="info-label col-sm-6 col-md-6">Ports</label>
+              <div class = "col-sm-6 col-md-6">
+                  <div class "row" id=subrow>
+                    <label class="usb31 info" id="no-info">0 x USB 3.1</div>
+                  <div class "row" id=subrow>
+                    <label class="usb3 info">2 x USB 3.0</div>
+                  <div class "row" id=subrow>
+                    <label class="usb2 info">4 x USB 2.0</div>
+                  </div>
+              </div>
+            </div>
+          </div>
+    <div id="mobocard_2" class="card mobo">
+      <div id="frontmobo_2" class="front">
+          <div class="brandvalue" id="brand">Gigabyte</div>
+          <div class="moboSKU">GA Z170MX</div>
+          <div class="priceValue" id="price">152.99</div>
+        </div>
+      <div id="backmobo_2" class="back">
+          <div class= "row" id=toprow>
+              <div id="label" class="info-label col-sm-6 col-md-6">Brand</div>
+            <div class = "col-sm-6 col-md-6">
+              <div class="moboMaker info">Gigabyte</div>
+              </div>
+          </div>
+          <div class= "row">
+            <div id="label" class="info-label col-sm-6 col-md-6">SKU</div>
+            <div class = "col-sm-6 col-md-6">
+            <div class="moboSKU info">GA Z170MX</div>
+              </div>
+            </div>
+          <div class= "row" >
+              <div id="label" class="info-label col-sm-6 col-md-6">Type</div>
+              <div class = "col-sm-6 col-md-6">
+                <div class="ramType info">supports DDR3</div>
+                </div>
+
+              </div>
+          <div class= "row">
+            <div id="label"  class="info-label col-sm-6 col-md-6">Ram Speed</div>
+            <div class = "col-sm-6 col-md-6">
+            <div class="ramSpeed info">up to3466 Mhz</div>
+              </div>
+            </div>
+            <div class= "row">
+              <label id="label" class="info-label col-sm-6 col-md-6">Ports</label>
+              <div class = "col-sm-6 col-md-6">
+                  <div class "row" id=subrow>
+                    <label class="usb31 info" id="no-info">2 x USB 3.1</div>
+                  <div class "row" id=subrow>
+                    <label class="usb3 info">3 x USB 3.0</div>
+                  <div class "row" id=subrow>
+                    <label class="usb2 info">2 x USB 2.0</div>
+                  </div>
+              </div>
+            </div>
+              </div>
+    <div id="mobocard_3" class="card mobo">
+      <div id="frontmobo_3" class="front">
+          <div class="brandvalue" id="brand">MSI</div>
+          <div class="moboSKU">H170A</div>
+          <div class="priceValue" id="price">128.99</div>
+        </div>
+      <div id="backmobo_3" class="back">
+          <div class= "row" id=toprow>
+              <div id="label" class="info-label col-sm-6 col-md-6">Brand</div>
+            <div class = "col-sm-6 col-md-6">
+              <div class="moboMaker info">MSI</div>
+              </div>
+          </div>
+          <div class= "row">
+            <div id="label" class="info-label col-sm-6 col-md-6">SKU</div>
+            <div class = "col-sm-6 col-md-6">
+            <div class="moboSKU info">H170A</div>
+              </div>
+            </div>
+            <div class= "row">
+              <div id="label" class="info-label col-sm-6 col-md-6">Type</div>
+              <div class = "col-sm-6 col-md-6">
+                <div class="ramType info">supports DDR3</div>
+                </div>
+
+              </div>
+          <div class= "row">
+            <div id="label"  class="info-label col-sm-6 col-md-6">Ram Speed</div>
+            <div class = "col-sm-6 col-md-6">
+            <div class="ramSpeed info">up to 3400 Mhz</div>
+              </div>
+            </div>
+            <div class= "row">
+              <label id="label" class="info-label col-sm-6 col-md-6">Ports</label>
+              <div class = "col-sm-6 col-md-6">
+                  <div class "row" id=subrow>
+                    <label class="usb31 info" id="no-info">2 x USB 3.1</div>
+                  <div class "row" id=subrow>
+                    <label class="usb3 info">4 x USB 3.0</div>
+                  <div class "row" id=subrow>
+                    <label class="usb2 info">2 x USB 2.0</div>
+                  </div>
+              </div>
+            </div>
+          </div>
+    <div id="mobocard_4" class="card mobo">
+      <div id="frontmobo_4" class="front">
+          <div class="brandvalue" id="brand">Asus</div>
+          <div class="moboSKU">Z170i Pro</div>
+          <div class="priceValue" id="price">164.99</div>
+        </div>
+      <div id="backmobo_4" class="back">
+          <div class= "row" id=toprow>
+              <div id="label" class="info-label col-sm-6 col-md-6">Brand</div>
+            <div class = "col-sm-6 col-md-6">
+              <div class="moboMaker info">Asus</div>
+              </div>
+          </div>
+          <div class= "row">
+            <div id="label" class="info-label col-sm-6 col-md-6">SKU</div>
+            <div class = "col-sm-6 col-md-6">
+            <div class="moboSKU info">Z170i Pro</div>
+              </div>
+            </div>
+            <div class= "row">
+              <div id="label" class="info-label col-sm-6 col-md-6">Type</div>
+              <div class = "col-sm-6 col-md-6">
+                <div class="ramType info">DDR4</div>
+                </div>
+
+              </div>
+          <div class= "row">
+            <div id="label"  class="info-label col-sm-6 col-md-6">Ram Speed</div>
+            <div class = "col-sm-6 col-md-6">
+            <div class="ramSpeed info">up to 3400 Mhz</div>
+              </div>
+            </div>
+            <div class= "row">
+              <label id="label" class="info-label col-sm-6 col-md-6">Ports</label>
+              <div class = "col-sm-6 col-md-6">
+                  <div class "row" id=subrow>
+                    <label class="usb31 info" id="no-info">2 x USB 3.1</div>
+                  <div class "row" id=subrow>
+                    <label class="usb3 info">4 x USB 3.0</div>
+                  <div class "row" id=subrow>
+                    <label class="usb2 info">2 x USB 2.0</div>
+                  </div>
+              </div>
+            </div>
+              </div>
+
+</div>
+
+
+
+
+
+
+<div id="preView" class="hidethis view">
+  <div id="prebCard1" class="card pCard prebuilt">
+    <div id="prebFront1" class="front">
+        <div class="brandvalue"id="brand">Dell</div>
+        <div class="lolvalue" id="lol">XPS</div>
+        <div class="priceValue pcss" id="price">529.99</div>
+    </div>
+    <div id="prebBack1" class="back">
+        <div class= "row" id=toprow>
+          <label id="label" class="info-label col-sm-4 col-md-5">Name</label>
+            <div class = "col-sm-4 col-md-5">
+              <label class="makeInfo info">Dell</label>
+              </div>
+
+          </div>
+        <div class= "row">
+            <label id="label" class="info-label col-sm-4 col-md-5">Processor</label>
+              <div class = "col-sm-4 col-md-5">
+                <label class="processorSKU info">Core i5 6400</label>
+                <label class="processorSpeed info">Skylake 2.7 GHz</label>
+              </div>
+            </div>
+        <div class= "row">
+              <label id="label"  class="info-label col-sm-4 col-md-5">Memory</label>
+                <div class = "col-sm-4 col-md-5">
+                  <label class="ramCap info">8Gb DDR3</label>
+                  <label class="ramSpeed info">1600 Mhz</label>
+
+                  </div>
+
+              </div>
+        <div class= "row">
+                <label id="label" class="info-label col-sm-4 col-md-5">Storage</label>
+                  <div class = "col-sm-4 col-md-5">
+                    <label class="hardDrive1 info">1 Tb 7200rpm</label>
+                  </div>
+                </div>
+        <div class= "row">
+          <label id="label" class="info-label col-sm-4 col-md-5">Ports</label>
+          <div class = "col-sm-4 col-md-5">
+              <div class "row" id=subrow>
+                <label class="usb31 info" id="no-info">0 x USB 3.1</div>
+              <div class "row" id=subrow>
+                <label class="usb3 info">2 x USB 3.0</div>
+              <div class "row" id=subrow>
+                <label class="usb2 info">4 x USB 2.0</div>
+              </div>
+          </div>
+    </div>
+  </div>
+
+  <div id="prebCard2" class="card pCard prebuilt">
+    <div id="prebFront2" class="front">
+        <div class="brandvalue"id="brand">Lenovo</div>
+        <div class="lolvalue" id="lol">ThinkWork</div>
+        <div class="priceValue pcss" id="price">629.99</div>
+    </div>
+    <div id="prebBack2" class="back">
+        <div class= "row" id=toprow>
+          <label id="label" class="info-label col-sm-4 col-md-5">Name</label>
+            <div class = "col-sm-4 col-md-5">
+              <label class="makeInfo info">Lenovo</label>
+              </div>
+
+          </div>
+        <div class= "row">
+            <label id="label" class="info-label col-sm-4 col-md-5">Processor</label>
+              <div class = "col-sm-4 col-md-5">
+                <label class="processorSKU info">Core i5 6500</label>
+                <label class="processorSpeed info">Skylake 3.2 GHz</label>
+              </div>
+            </div>
+        <div class= "row">
+              <label id="label"  class="info-label col-sm-4 col-md-5">Memory</label>
+                <div class = "col-sm-4 col-md-5">
+                  <label class="ramCap info">4Gb DDR4</label>
+                  <label class="ramSpeed info">2133 Mhz</label>
+
+                  </div>
+
+              </div>
+        <div class= "row">
+                <label id="label" class="info-label col-sm-4 col-md-5">Storage</label>
+                  <div class = "col-sm-4 col-md-5">
+                    <label class="hardDrive1 info">500 Gb 7200rpm</label>
+                  </div>
+                </div>
+        <div class= "row">
+          <label id="label" class="info-label col-sm-4 col-md-5">Ports</label>
+          <div class = "col-sm-4 col-md-5">
+              <div class "row" id=subrow>
+                <label class="usb31 info" id="no-info">0 x USB 3.1</div>
+              <div class "row" id=subrow>
+                <label class="usb3 info">8 x USB 3.0</div>
+              <div class "row" id=subrow>
+                <label class="usb2 info">0 x USB 2.0</div>
+              </div>
+          </div>
+    </div>
+  </div>
+
+
+
+
+
+
+</div>
+  <div class="staticComputer">
+    <div >
+        <div class= "row" id=toprow>
+          <label id="label" class="info-label col-sm-4 col-md-5">Name</label>
+            <div class = "col-sm-4 col-md-5">
+              <label id="makeInfo" class="pMake info">Dell</label>
+              </div>
+
+          </div>
+        <div class= "row">
+            <label id="label" class="info-label col-sm-4 col-md-5">Processor</label>
+              <div class = "col-sm-4 col-md-5">
+                <div id="processorSKU" class="info">Core i5 6400</div>
+                <div id="processorSpeed" class="info">Skylake 2.7 GHz</div>
+              </div>
+            </div>
+        <div class= "row">
+              <label id="label"  class="info-label col-sm-4 col-md-5">Memory</label>
+                <div class = "col-sm-4 col-md-5">
+                  <div id="ramCap" class="info">8 Gb DDR3</div>
+                  <div id="ramSpeed" class="info">1600 Mhz</div>
+
+                  </div>
+
+              </div>
+        <div class= "row">
+                <label id="label" class="info-label col-sm-4 col-md-5">Storage</label>
+                  <div class = "col-sm-4 col-md-5">
+                    <div class "row" id=subrow>
+
+                      <div id="hardDrive1" class="info">1 Tb 7200rpm</div>
+                    </div>
+                    <div class "row" id=subrow>
+
+                    <div id="hardDrive2"class="info">None</div>
+                        </div>
+                        <div class "row" id=subrow>
+
+                    <div id="hardDrive3" class="info">None</div>
+                        </div>
+
+                  </div>
+                </div>
+        <div class= "row">
+          <label id="label" class="info-label col-sm-4 col-md-5">Ports</label>
+          <div class = "col-sm-4 col-md-5">
+              <div class "row" id=subrow>
+              <!--no-info"-->
+                <div class="info" id="usb31">0 x USB 3.1</div>
+              <div class "row" id=subrow>
+                <label id="usb3" class="info">2 x USB 3.0</div>
+              <div class "row" id=subrow>
+                <label id="usb2" class="info">4 x USB 2.0</div>
+              </div>
+          </div>
+        </div>
+        <div class= "row">
+          <p class="textsupport">$
+          <span id="priceValue" class="staticValue">529.99</span>
+          </p>
+
+
+        </div>
+</div>
+
+</div>
+
+<div class="dropbox">
+  <div id="dragbox" class= "center-drag-text hidethis">DRAG CARD HERE</div>
+  <p id="cbox">collison count</p>
+  <p id="ccount">0</p>
+</div>
+
+
+</body>
+</html>

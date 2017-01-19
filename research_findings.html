@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<HEAD>
+<title>Research Findings</title>
+<link rev="Made" href="mailto:jlyuen@ics.uci.edu">
+<meta charset="UTF-8" name="viewport" content="width=device-width" author="Jonathan Yuen">
+<!-- <link rel="stylesheet" type="text/css" href="css/waterbottles.css"media="screen and (min-width:10.5em)"> -->
+<link rel="stylesheet" type="text/css" href="css/mobile.css"media="screen and (min-width:10.5em)">
+
+</head>
+<script src="js/jquery-3.1.0.js"></script>
+
+<script>
+window.onload= function(){
+  // document.getElementById("picturebutton_less").className="hide";
+}
+$(function(){
+  $(".btn").on('touchstart click' , function(){
+      show_this(this.id);
+  });
+  function show_this(id){
+    var t=document.getElementById("img-"+id);
+    t.src=("img/"+id+".jpg");
+    // t.style.display="block";
+    t.style.width="95%";
+    t.style.marginLeft="2.5%";
+
+
+    document.getElementById(id).style.display="none";
+  }
+
+
+});
+
+</script>
+
+
+
+
+
+
+<BODY>
+<header>
+<nav>
+  <div id="navbar">
+<li><a id="home" href="index.html">Home</a></li>
+<li><a id="tools" href="class_examiner.html">Tools</a></li>
+<li><a id="contact" >Contact</a></li>
+<li><a id= "aquafinda" href="waterbottles.html">Aquafinda</a></li>
+<li><a id= "research" href="research_findings.html">Research</a></li>
+
+</div>
+</nav>
+</header>
+<div onload="onload()" class="base-container">
+<h1> Research Findings</h1>
+<div class="container">
+  <h3>Competitor Analysis</h3>
+  <button class="btn" id="competitor">see</button>
+  <img id="img-competitor"></img>
+  <ul>
+    <li> Competitor analysis is time taken to find out about what kinds of competition the project that you are creating would be facing and to see how your product would match up when compared to them.</li>
+    <li>Two portfolio sites were reviewed because they would be similar to the project being created.</li>
+    <li>A tools website was also reviewed because I like making random tools that help simplify or benefit my or other peoples life</li>
+    <li><a href="https://drive.google.com/open?id=1c1w1BaEZsuynCKaLqvJz2zzcI3GdPFtgsJ1gjjBkuTI">Click here to see some </a> Competitor Analysis</li>
+</ul>
+  </div>
+  <div class="container">
+    <h3>Interviews</h3>
+    <button class="btn" id="userinterviews">see</button>
+    <img id="img-userinterviews"></img>
+    <ul>
+      <li>User interviews are important because it helps you determine the things the pepole who are using your product will be using it for and the types of people who would be using your product.</li>
+      <li>People I chose to interview were close friends as well as people who were in the different student organizations I was also a part of who would find use in using my tool</li>
+      <li><a href"https://drive.google.com/open?id=1c1w1BaEZsuynCKaLqvJz2zzcI3GdPFtgsJ1gjjBkuTI">Click here to see some </a> User Interviews!</li>
+  </ul>
+    </div>
+<div class="container">
+  <h3>Feature Value Matrix</h3>
+  <button class="btn" id="featurematrix">see</button>
+  <img id="img-featurematrix"></img>
+  <ul>
+  <li>A feature matrix is a way of planning and organizing the features which your product contains or they are features that your product will contain in the future. I selected these features because they were the features that was most inline with the type of website I was trying to build. I plan on incrementally adding more features in the future. For the tools section, I am looking into finding ways to create a database to store the different class chedules. In the future I would like to create an automated email reading aspect to automatically add different classes and peoples interests to the database, to be accessed from the tools page.</li>
+  <li><a href="https://drive.google.com/open?id=1c1w1BaEZsuynCKaLqvJz2zzcI3GdPFtgsJ1gjjBkuTI">Click here to see </a> theFeature Matrix</li>
+</ul>
+  </div>
+<div class="container">
+  <h3>Feature Prioritization</h3>
+  <button class="btn" id="prioritization">see</button>
+  <img id="img-prioritization"></img>
+  <ul>
+  <li>Features on this project were prioritized based on functionality therefore many elements required for aesthetics was placed at a lower priority. I plan on implementing each feature as I get more time and also as I come up with new ideas </li>
+  <li><a href="https://drive.google.com/open?id=1c1w1BaEZsuynCKaLqvJz2zzcI3GdPFtgsJ1gjjBkuTI">Click here to see </a> Feature Prioritization</li>
+</ul>
+</div>
+
+<div class="container" >
+  <h3>User Stories</h3>
+  <button class="btn" id="stories">see</button>
+  <img id="img-stories"></img>
+  <ul>
+    <li>User stories are important because they allow for users to be able to understand from their perspective the purposes of the features and how they would go about to utilizing those features.</li>
+    <li>The stories were created based on how I envisioned myself or other people accessing my website. Unfortunately I later found though the tests that I will need to add instructions to make the page easier to use</li>
+    <li><a href="https://docs.google.com/a/uci.edu/spreadsheets/d/1gwf1UOGi7RVo4HCyX23IssxCoBaOfwrBfEJci5HsQpk/edit?usp=sharing">Click here to see</a>User Stories</li>
+  </ul>
+</div>
+<div class="container" >
+  <h3>Cognitive Walkthroughs</h3>
+<button class="btn" id="walkthrough">see</button>
+<img id="img-walkthrough"></img>
+  <ul>
+    <li>Cognitive walkthrough is important because it helps determine whether or not your product is intuitively easy enough to use. Because usability is so important to people who make websites and other tools, we need to make sure that our product is intuitively usable by the user. </li>
+    <li> Somethings that were difficult about this part of User testing was that I feel as though my tools and website design was pretty minimalistic and as such it was relitively easy to perform cognitive walk though tests on users.</li>
+    <li><a href="https://drive.google.com/open?id=1c1w1BaEZsuynCKaLqvJz2zzcI3GdPFtgsJ1gjjBkuTI">Click here to see</a>Congnitive Walk Through</li>
+  </ul>
+</div>
+
+<div class="container" >
+<h3>User Tests</h3>
+<button class="btn" id="test">see</button>
+<img id="img-test"></img>
+  <ul>
+    <li>Some types of tests that I conducted were tests to see if my website was too confusign to use or if I would be able to increase the complexity of the website. I also chose different types of individuals to perform these tests where some were very familiar with the ins and outs of computers while others were not </li>
+    <li>Another user test that I performed was to identify whether my tools section of my website was visually apppealing because I wanted to get feed back on how it looked</li>
+    <li><a href="https://usabilityhub.com/tests/de6ed9490c80/results/940c758f243c">Link to Test 1 results</a></li>
+    <li><a href="https://usabilityhub.com/tests/c73cdd1d5e73/results/e0dfb6b3a807">Link to Test 2 results</a></li>
+  </ul>
+
+</div>
+<div class="container">
+  <h3>Summary of Findings</h3>
+  <ul>
+  <li><p>Based on my tests, what I was able to draw from the results was that my tool and web page is very bland and rather visually unappealing. Based on some suggestions, I was told that changing the design of the page would help greatly. In addition. prior to seeing the results of the page, I thought that my tools page was easy to use, however based on some feed back that I recieved, it seems that some of my buttons on the tools page could have some additional instructions included to help clarify their purpose to the user</p>
+  </li>
+  <li><p>from my cognitive walkthroughs I was able to find that my web page was easy to navigate however, I was told that parts of my website was not consistent with a uniform look. In addition, due to the limitation of the click test from UsabilityHub.com, the testers were only able to click and not actually interact with the web page. Once I present the web page to people to use, they were able to use it, contrary to my results received from my usabilityhub test.</p></li>
+  <li><p>Overall, I knew that my tools and portfolio site is far from a complete perfected project however, the tests was able to help me understand that I still have alot of work to do especially in the aesthetics department. I may need to look into redesigning the tools section of my website and doing additional research into learning about visual design. Visual design seems to be a common topic when reading about the criticisms in my usability test.</p></li>
+  </ul>
+  </div>
+<div class="container" >
+  <h3>Implementation of Findings</h3>
+
+  <ul>
+    <li><p>Moving forward, I plan on doing additional research on how to make my website and the tools section to be better designed so that people will find it more visually appealing. I am not an artsy person so I think that this research will be very useful in helping me design things in the future.</p></li>
+    <li><p>Because some people thought that my tools contained some unfamiliar buttons, I thought about adding hints over my buttons however, I need to think of a better way to implement that since hover doesnt work on mobile. However I plan on adding more instructions to help clarify the usage of my tool since confusion was a common response in my usabilityhub tests</p></li>
+    <li><p>Some difficulty and challenges that I faced was that alot of times, I knew what changes in the design and what additional content that I wanted to make, however when it came down to implementing it, it often became much more difficult especially when I was sharing a similar css file with 4-5 different pages. To counteract this, I had to write specific CSS for the pages that I needed.</p></li>
+    <li><p>If you would like to give me some feedback, here are links to my usabilityhub tests</p>
+      <a href="https://usabilityhub.com/do/c73cdd1d5e73/c4e8">Link to Test 2</a>
+    <a href="https://usabilityhub.com/do/de6ed9490c80/7ed3">Link to Test 1</a></li>
+  </ul>
+  </div>
+</div>
+<footer>
+<address>
+  Last modified: 40 Apr 2116
+
+<a href="http://www.ics.uci.edu/~jlyuen/research_findings.html">
+<span style="color:blue">Research Findings</span></a><BR>
+<span style="color:blue">Irvine, CA 92697-3425</span>
+</address>
+
+</footer>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+"Name": "Vedang",
+"Year": "Freshman",
+"Quarter":"Fall",
+"Major": "Computer Science",
+"Classes":
+    [{"Dept":"ICS","Code":"32"},
+    {"Dept":"Inf","Code":"122"},
+    {"Dept":"CS","Code":"132"},
+    {"Dept":"ICS","Code":"45C"}
+    ]
+}

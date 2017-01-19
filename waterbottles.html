@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Aquafinda</title>
+<link rev="Made" href="mailto:jlyuen@ics.uci.edu">
+<meta charset="UTF-8" name="viewport" content="width=device-width" author="Jonathan Yuen">
+<!-- <link rel="stylesheet" type="text/css" href="css/waterbottles.css"media="screen and (min-width:10.5em)"> -->
+<link rel="stylesheet" type="text/css" href="css/mobile.css"media="screen and (min-width:10.5em)">
+<script src="js/jquery-3.1.0.js"></script>
+<script src="js/play.js"></script>
+</head>
+
+
+<script>
+window.onload= function(){
+  document.getElementById("picturebutton_less").className="hide";
+}
+$(function(){
+  $("#picturebutton").on('touchstart', function(){
+      loadpic();
+    });
+  $("#picturebutton").on('click', function(){
+      loadpic();
+    });
+  $("#picturebutton_less").on('touchstart', function(){
+        hidepic();
+      });
+  $("#picturebutton_less").on('click', function(){
+        hidepic();
+      });
+
+  function hidepic(){
+    var t = document.getElementById("loadpic");
+    if (t.className==""){
+      document.getElementById("loadpic").className="hide";
+      document.getElementById("picturebutton").className="";
+      document.getElementById("picturebutton_less").className="hide";
+
+    }
+
+  }
+  function loadpic(){
+    var t =document.getElementById("loadpic");
+    if (t.className=="hide"){
+      document.getElementById("loadpic").className="";
+      document.getElementById("picturebutton").className="hide";
+      document.getElementById("picturebutton_less").className="";
+
+      t.style.marginLeft="1%";
+      t.style.paddingBottom="1.2%";
+      if (window.innerWidth<=600){
+        t.style.width="300px";
+      }
+      else if (window.innerWidth<=800){
+        t.style.width="400px";
+      }
+      else{
+      t.style.width="624px";
+      }
+      t.src=("img/desert.jpg");
+    }
+  else {
+
+  }
+}
+
+});
+
+</script>
+
+
+
+<body>
+<header>
+    <div class 'toparea'>
+
+  <!-- <img href="waterbottles.html"src="img/aquafinda2.jpg" alt="Aquafinda" style="width:30%;height:114px"> -->
+  </div>
+<nav>
+  <div id="navbar">
+<li><a id="home" href="index.html">Home</a></li>
+<li><a id="tools" href="class_examiner.html">Tools</a></li>
+<li><a id="contact" >Contact</a></li>
+<li><a id= "aquafinda" href="waterbottles.html">Aquafinda</a></li>
+<li><a id= "research" href="research_findings.html">Research</a></li>
+
+</div>
+</header>
+</nav>
+<div onload="onload()" class="base-container">
+  <h1 style="width:70%">Aquafinda Waterbottles</h1>
+
+<div class="container" id='mymain'>
+  <h3>What is Aquafinda?</h3>
+  <p id="aboutaquafinda">Aquafinda is an innovative new waterbottle designed to help you help California
+  to keep this drought from getting anyworse. Instead of buying our competitor,
+  Aquafina's terrible water, just purchase one of these and help save the world
+  one bottle at a time!</p>
+  </div>
+
+<div class="container" id='Contact'>
+  <h3>Contact</h3>
+  <p> If you have more information, feel free to contact us at the following
+    mediums listed below</p>
+  <ol>
+  <li>E-mail: <a href="mailto:scam@spammail.com">scam@spammail.com</a></li>
+</ol>
+</div>
+<div class="container" id='moar'><h3>More Water</h3>
+  <p>Did you know that 100% of people who drink water die? Save your self and help eliminate the California drought one water bottle at a time</p>
+</div>
+<div class="container" id='Drought'>
+  <h3>Drought</h3>
+  <button id="picturebutton" >See More</button>
+  <button id="picturebutton_less" >See Less</button>
+
+  <img  class="hide" id="loadpic">
+</div>
+
+<div class="container" id='otherstuff'>
+<h3>Our Water</h3>
+
+<p>To learn more about the our freshly purified spring water (project)</p>
+<a href="water.html">Click here to</a>
+ <p>Learn more about our water.</p>
+</div>
+<div class="container" id='help'>
+  <h3>Ways to help</h3>
+  <ul>
+  <li>Donate</li>
+  <li>Itinerary</li>
+  <li>Ways to help</li>
+  <li>Get Involved</li>
+  </ul>
+
+  </div>
+</div>
+<footer>
+<address>
+  Last modified: 40 Apr 2115
+
+<a href="http://www.ics.uci.edu/~jlyuen/waterbottles.html">
+<span style="color:blue">Aquafinda Water</span></a><br>
+<span style="color:blue">Irvine, CA 92697-3425</span>
+</address>
+
+</footer>
+</body></html>

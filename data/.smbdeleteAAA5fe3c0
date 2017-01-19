@@ -1,0 +1,12 @@
+{
+"Name": "Max",
+"Year": "Freshman",
+"Quarter":"Winter",
+"Major": "Computer Science",
+"Classes":
+    [{"Dept":"ICS","Code":"32"},
+    {"Dept":"Inf","Code":"121"},
+    {"Dept":"Math","Code":"2B"},
+    {"Dept":"ICS","Code":"45C"}
+    ]
+}

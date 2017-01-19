@@ -1,0 +1,11 @@
+{
+"Name": "David",
+"Year": "Sophomore",
+"Quarter":"Fall",
+"Major": "Fucking Nerd",
+"Classes":
+    [{"Dept":"ICS","Code":"5"},
+    {"Dept":"Film","Code":"85A"},
+    {"Dept":"Econ","Code":"20B"}
+    ]
+}
