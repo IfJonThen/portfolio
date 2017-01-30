@@ -8,10 +8,29 @@
 <meta charset="UTF-8" name="viewport" content="width=device-width" author="Jonathan Yuen">
 <link rel="stylesheet" type="text/css"  href="css/port.css" media="screen and (min-width:10.5em)"/>
 <script src="js/jquery-3.1.0.js"></script>
-<script src="js/play.js"></script>
+  <script src="js/next.js"></script>
+<!--<script src="js/play.js"></script>-->
 
 <script>
+  window.$=$;
+  window.jQuery=jQuery;
 $(function(){
+    var mystate=1;
+    $("#down").on('click touchstart', (e)=>{
+        e.stopPropagation();
+        e.preventDefault();
+        if(mystate<=5){mystate++;console.log(mystate);$("#content" + (mystate-1)).addClass("hidden");$("#content" + mystate).removeClass("hidden");
+        changeInfo(mystate);
+        }
+    });
+    $("#up").on('click touchstart', (e)=>{
+        e.stopPropagation();
+        e.preventDefault();
+        if(mystate>1){mystate--;console.log(mystate);
+            $("#content" + (mystate+1)).addClass("hidden");
+            changeInfo(mystate);
+            $("#content" + mystate).removeClass("hidden");}
+    });
 
 function jump(here){
   window.location.hash=here;
@@ -24,51 +43,74 @@ function sendEmail(){
 </script>
 <style>
 body{
-  background-image: url("/~jlyuen/img/grand_canyon_2.jpg");
+  background-image: url("C:/Users/Jonsen/Desktop/JonsStuff/portfolio/img/grand_canyon_2.jpg");
+  ");
 }
 
 </style>
+  <style type="text/css">div.image {max-width: 256px;max-height: 256px;background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDU5LjQxNSA1OS40MTUiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDU5LjQxNSA1OS40MTU7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiPgo8Zz4KCTxwb2x5Z29uIHN0eWxlPSJmaWxsOiM0OEEwREM7IiBwb2ludHM9IjU4LDQ1LjI2OCAyOS43MDgsMTYuOTc1IDEuNDE0LDQ1LjI2OCAwLDQzLjg1NCAyOS43MDgsMTQuMTQ3IDU5LjQxNSw0My44NTQgICIvPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=)}</style>
+  <style type="text/css">div.image {max-width: 256px;max-height: 256px;background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDU5LjQxNCA1OS40MTQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDU5LjQxNCA1OS40MTQ7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiPgo8Zz4KCTxwb2x5Z29uIHN0eWxlPSJmaWxsOiM0OEEwREM7IiBwb2ludHM9IjI5LjcwNyw0NS4yNjggMCwxNS41NjEgMS40MTQsMTQuMTQ2IDI5LjcwNyw0Mi40MzkgNTgsMTQuMTQ2IDU5LjQxNCwxNS41NjEgICIvPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=)}</style>
+
 </head>
 <body>
 <header>
 
 <nav>
-  <div id="port_navbar">
-<li><a id="home" href="index.html">Home</a></li>
-<li><a id="tools" href="class_examiner.html">Tools</a></li>
-<li><a id="contact">Contact</a></li>
-<li><a id= "aquafinda" href="waterbottles.html">Aquafinda</a></li>
-<li><a id= "research" href="final_project.html">Research</a></li>
-<li><a id= "next" href="next.html">Portfolio</a></li>
-</div>
+  <!--<div id="navbar">-->
+  <!--<li><a id="home" href="index.html">Home</a></li>-->
+  <!--<li><a id="tools" href="class_examiner.html">Tools</a></li>-->
+  <!--<li><a id="contact">Contact</a></li>-->
+  <!--<li><a id= "aquafinda" href="waterbottles.html">Aquafinda</a></li>-->
+  <!--<li><a id= "research" href="final_project.html">Research</a></li>-->
+  <!--<li><a id= "next" href="next.html">Portfolio</a></li>-->
+  <!--</div>-->
 </nav>
 </header>
 
-<div id="main"class= "base-container">
-  <h1>Jonathan Yuen</h1>
-  <div class ="container"  id="head">
+<div id="main" class= "base-container">
+  <div class="naviarrows">
+    <img  id="up" class="arrow" style="max-width:50%;"src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDU5LjQxNSA1OS40MTUiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDU5LjQxNSA1OS40MTU7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiPgo8Zz4KCTxwb2x5Z29uIHN0eWxlPSJmaWxsOiM0OEEwREM7IiBwb2ludHM9IjU4LDQ1LjI2OCAyOS43MDgsMTYuOTc1IDEuNDE0LDQ1LjI2OCAwLDQzLjg1NCAyOS43MDgsMTQuMTQ3IDU5LjQxNSw0My44NTQgICIvPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=" />
+    <img  id="down"class="arrow" style="max-width:50%;"src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDU5LjQxNCA1OS40MTQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDU5LjQxNCA1OS40MTQ7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiPgo8Zz4KCTxwb2x5Z29uIHN0eWxlPSJmaWxsOiM0OEEwREM7IiBwb2ludHM9IjI5LjcwNyw0NS4yNjggMCwxNS41NjEgMS40MTQsMTQuMTQ2IDI5LjcwNyw0Mi40MzkgNTgsMTQuMTQ2IDU5LjQxNCwxNS41NjEgICIvPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=" />
 
-  <div height="500px" width="auto" id="picture">
-
-    <img style="width:100%" id="mypic"></img>
-  </div>
   </div>
 
+  <div class="content" id="content1">
+  <!--<div class="content hidden" id="content1">-->
+      <p id="name">Jonathan Yuen</p>
+  </div>
 
 
+  <div class="content hidden"  id="content2">
+    <div class= "" height="auto" width="auto" id="picture">
+    <img style="max-width:90%" id="mypic"></img>
+  </div>
+  </div>
+  <div class="content hidden" id="content3">
+    <h1>About Jon</h1>
+    <p id="about"></p>
+  </div>
+  <div class="content hidden" id="content4"> </div>
+  <div class="content hidden" id="content5">
+  </div>
+
+
+
+
+</div>
+<div class="content hidden">
 
 </div>
 
 
 
 <br>
+<footer>
 <address>
 <a href="http://www.ics.uci.edu/">
-Information and Computer Science</a><BR>
+Information & Computer Science</a>
 <a href="http://www.uci.edu/">University of California, Irvine</a><br>
-Irvine, CA 92697-3425
-Last modified: Oct 31 2016
-
+  <div class="hidden">Icons made by <a href="http://www.flaticon.com/authors/madebyoliver" title="Madebyoliver">Madebyoliver</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 </address>
+</footer>
 </body>
 </html>
