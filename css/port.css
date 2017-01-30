@@ -1,6 +1,26 @@
 * {
   /*box-sizing:border-box;*/
 }
+#name{
+    z-index:10;
+}
+.borderbox{
+    position:absolute;
+    background: rgba(0,0,0,0.1);
+    border: 2px solid rgba(0,0,0,0.4);
+
+}
+.invisible{
+    position:absolute;
+    left:5%;
+    top:15%;
+    height: 456px;
+    width:365px;
+    border: 2px solid white;
+    /*opacity:1.0;*/
+    background: rgba(0,0,0,0.1);
+    z-index:10;
+}
 a{
     color:white;
     font-style: normal;
@@ -23,7 +43,7 @@ h1{
   color: rgba(40,143,255,0.8);
     text-shadow: 1px 1px 5px #000000;
     /*text-shadow: 1px -1px #f9fff6;*/
-
+    z-index:11;
 }
 
 body{
@@ -31,11 +51,16 @@ body{
 }
 .hidden{
     position: relative;
-    left:-500px;
-    top:-500px;
+
+    /*opacity:0;*/
+    /*display:none;*/
+}
+.away{
     opacity:0;
     display:none;
-
+    position: relative;
+    left:-1000px;
+    top:-1000px;
 }
 .base-container{
     /*margin-right:5%;*/
@@ -46,11 +71,22 @@ body{
     max-width:90%;
 }
 .content{
- padding-top:50%;
-    padding-bottom:50%;
+    display:none;
+    position:absolute;
+    top:20%;
+    /*padding-top:50%;*/
+    /*padding-bottom:50%;*/
 }
+#name{
+    position: absolute;
+}
+#content1{
+    left:26%;
+    top:23%;
+    /*display: block;*/
+}s
 #content3, #content4, #content5{
-    padding-top:30%;
+    /*padding-top:30%;*/
 }
 
 button{
@@ -71,7 +107,8 @@ img#mypic{
       content: url("C:/Users/Jonsen/Desktop/JonsStuff/portfolio/img/picture_me_bw.jpg");
       /*max-width: 20%;*/
       display:inline-block;
-    margin-left:10%;
+    margin-left:5%;
+    margin-top:1%;
 }
 .myrow{
   width:50%;
@@ -92,6 +129,7 @@ picture{
 }
 address{
   margin-left:2.5%;
+  margin-right:2.5%;
   margin-right:2.5%;
 
   float:left;
@@ -244,11 +282,11 @@ a{
     bottom:4.5%;
 }
 div p{
-    margin-left:8%;
+    margin-left:5%;
     font-family:"Dosis";
     font-size:1.5em;
     color: rgba(255,255,255,0.9);
-
+    margin-right:5%;
 }
 #about{
 }
@@ -261,8 +299,11 @@ div p{
     text-shadow: 1px 1px 5px #000000;
 
     /*text-shadow: 5px, 5px, #4a4a4a;*/
-    font-family: "dosis";
+    font-family: "Dosis", SansSerif;
     font-style: italic;
+}
+.fade{
+    /*-webkit-animation: fadein 3.5s linear 1 normal forwards;*/
 }
 /*//desktop*/
 @media only screen and (min-width: 40.5em){
@@ -272,6 +313,10 @@ div p{
       h1{
         color: yellow;
         }
+      #name{
+          background-color:rgba(0,0,0,0.7);
+
+      }
     body{
       margin-top:0;
       margin-left:0;
@@ -294,32 +339,44 @@ div p{
         left:49%;
     }
     .content{
-     padding-top:10%;
+        left:24%;
+        top:24%;
+        width:800px;
+=    }
+    #content1{
+        left:19%;
+        top:29%;
+    }
+    #content2{
+        left:38%;
     }
     #content3,#content4,#content5{
-        padding-top:10%;
-        margin-left:20%;
+
+        margin-left:9%;
         margin-right:20%;
     }
     #name{
         /*padding-top:7%;*/
-        margin-left:25%;
-        font-size:6em;
-        padding-right:0;
-        margin-right:23%;
+        border:3px solid rgba(0,0,0,0.5);
+        padding: 26px 47px 27px 47px;
+        /*margin-left:25%;*/
+        /*font-size:6em;*/
+        /*padding-right:0;*/
+        /*margin-right:23%;*/
+        background-color:rgba(0,0,0,0.7);
     }
   h1{
     color:black;
       margin-left:15%;
   }
   #picture{
-      margin-left:31%;
+      margin-left:auto;
       margin-right:auto;
   }
     #mypic{
 
-        max-width:60%;
-        width:40%;
+        max-width:70%;
+        width:41%;
       }
     nav#navbar{
         height:100%;
@@ -342,5 +399,25 @@ div p{
       margin-right:2.5%;
 
     }
+    .invisible{
+        left:15%;
+        top:5%;
+        width:1000px;
+        height: 300px;
+    }
+    .borderbox{
 
+        left:30%;
+        top:31%;
+        width:214px;
+        height: 614px;
+    }
+}
+@-webkit-keyframes fadein{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
 }

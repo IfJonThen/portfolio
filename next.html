@@ -14,23 +14,48 @@
 <script>
   window.$=$;
   window.jQuery=jQuery;
+$(document).ready(()=>{
+    $("#content1").fadeTo(1300,1);
+});
 $(function(){
     var mystate=1;
     $("#down").on('click touchstart', (e)=>{
         e.stopPropagation();
         e.preventDefault();
-        if(mystate<=5){mystate++;console.log(mystate);$("#content" + (mystate-1)).addClass("hidden");$("#content" + mystate).removeClass("hidden");
-        changeInfo(mystate);
+        if(mystate<=5) {
+            mystate++;
+            console.log("fading out..."+ (mystate-1));
+            $("#content" + (mystate - 1)).fadeTo(1300,0);
+//            $("#content" + (mystate - 1)).addClass("hidden");
+//            $("#content" + (mystate - 1)).addClass("away");
+//            $("#content" + mystate).addClass("fade");
+            $("#content" + (mystate-1)).addClass("hidden");
+            changeInfo(mystate);
+//            $("#content" + mystate).removeClass("away");
+            console.log("fading in ..."+ (mystate));
+            $("#content" + (mystate)).fadeTo(1300,1);
+            console.log("fading in complete ..."+ (mystate));
+//            $("#content"+ mystate).css.display=block;
+//            fadeIn(300);
+//            $("#content" + mystate).removeClass("hidden");
+
         }
     });
     $("#up").on('click touchstart', (e)=>{
         e.stopPropagation();
         e.preventDefault();
-        if(mystate>1){mystate--;console.log(mystate);
-            $("#content" + (mystate+1)).addClass("hidden");
+        if(mystate>1) {
+            mystate--;
+            console.log(mystate);
+            $("#content" + (mystate + 1)).fadeTo(1300,0);
+
+            $("#content" + (mystate + 1)).addClass("hidden");
             changeInfo(mystate);
-            $("#content" + mystate).removeClass("hidden");}
-    });
+//            $("#content" + mystate).removeClass("hidden");
+            $("#content" + (mystate)).fadeTo(1300,1);
+
+        }
+        });
 
 function jump(here){
   window.location.hash=here;
@@ -74,24 +99,27 @@ body{
 
   </div>
 
-  <div class="content" id="content1">
+  <div class="content fade" id="content1">
   <!--<div class="content hidden" id="content1">-->
       <p id="name">Jonathan Yuen</p>
   </div>
 
 
-  <div class="content hidden"  id="content2">
+  <div class="content hidden "  id="content2">
     <div class= "" height="auto" width="auto" id="picture">
     <img style="max-width:90%" id="mypic"></img>
   </div>
   </div>
-  <div class="content hidden" id="content3">
+  <div class="content hidden " id="content3">
     <h1>About Jon</h1>
     <p id="about"></p>
   </div>
-  <div class="content hidden" id="content4"> </div>
-  <div class="content hidden" id="content5">
+  <div class="content hidden " id="content4"> </div>
+  <div class="content hidden " id="content5">
   </div>
+  <!--<div class="invisible">-->
+
+  <!--</div>-->
 
 
 
@@ -106,10 +134,9 @@ body{
 <br>
 <footer>
 <address>
-<a href="http://www.ics.uci.edu/">
-Information & Computer Science</a>
-<a href="http://www.uci.edu/">University of California, Irvine</a><br>
-  <div class="hidden">Icons made by <a href="http://www.flaticon.com/authors/madebyoliver" title="Madebyoliver">Madebyoliver</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+<a>Information & Computer Science</a>
+<a>University of California, Irvine</a>
+  <div class="hidden away">Icons made by <a href="http://www.flaticon.com/authors/madebyoliver" title="Madebyoliver">Madebyoliver</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 </address>
 </footer>
 </body>
