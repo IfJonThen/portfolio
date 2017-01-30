@@ -71,6 +71,7 @@ body{
     max-width:90%;
 }
 .content{
+    /*border: 2px solid white;*/
     display:none;
     position:absolute;
     top:20%;
@@ -81,10 +82,15 @@ body{
     position: absolute;
 }
 #content1{
-    left:26%;
     top:23%;
+    left:30%;
     /*display: block;*/
-}s
+}
+#content2{
+    position:absolute;
+    max-width:70%;
+    left:24%;
+}
 #content3, #content4, #content5{
     /*padding-top:30%;*/
 }
@@ -105,10 +111,9 @@ button{
 
 img#mypic{
       content: url("C:/Users/Jonsen/Desktop/JonsStuff/portfolio/img/picture_me_bw.jpg");
-      /*max-width: 20%;*/
+    max-width: 80%;
       display:inline-block;
-    margin-left:5%;
-    margin-top:1%;
+
 }
 .myrow{
   width:50%;
@@ -124,9 +129,7 @@ img#mypic{
 header{
     /*background: #4286f4;*/
 }
-picture{
-  width:100%;
-}
+
 address{
   margin-left:2.5%;
   margin-right:2.5%;
@@ -174,16 +177,8 @@ nav div li a:hover{
     display:inherit;
     max-width:100%;
 }
-picture{
-  display:inline-block;
-}
 
-div {
-  width:auto;
-  /*background-image: url('404ErrrorNotFound.jpg');*/
-  background-repeat: no-repeat;
-  background-size: contain;
-}
+
 body{
   /*background-image: url('S404ErrorNotFound.jpg')*/
 }
@@ -291,10 +286,9 @@ div p{
 #about{
 }
 #name{
-    max-width:90%;
-    margin-left:23%;
-    margin-right:5%;
-    font-size:4em;
+    /*max-width:90%;*/
+
+    font-size:3.5em;
     color: rgba(255,255,255,0.8);
     text-shadow: 1px 1px 5px #000000;
 
@@ -308,7 +302,7 @@ div p{
 /*//desktop*/
 @media only screen and (min-width: 40.5em){
     img#mypic{
-        max-width:80%;
+        max-width:60%;
       }
       h1{
         color: yellow;
@@ -341,10 +335,11 @@ div p{
     .content{
         left:24%;
         top:24%;
+        max-width:60%;
         width:800px;
 =    }
     #content1{
-        left:19%;
+        left:35%;
         top:29%;
     }
     #content2{
