@@ -38,7 +38,7 @@ h1{
   /*background-color: #b3d1ff;*/
     font-family:"Dosis", SansSerif;
     font-size:2.5em;
-  margin-left:30px;
+  /*margin-left:30px;*/
   font-style: normal;
   color: rgba(40,143,255,0.8);
     text-shadow: 1px 1px 5px #000000;
@@ -51,9 +51,6 @@ body{
 }
 .hidden{
     position: relative;
-
-    /*opacity:0;*/
-    /*display:none;*/
 }
 .away{
     opacity:0;
@@ -63,36 +60,36 @@ body{
     top:-1000px;
 }
 .base-container{
-    /*margin-right:5%;*/
-    /*margin-left:5%;*/
     margin-top: 2.5%;
-    /*display:inline-block;*/
-    /*float:left;*/
     max-width:90%;
 }
 .content{
     /*border: 2px solid white;*/
     display:none;
-    position:absolute;
+    position:fixed;
     top:20%;
+    text-align:center;
     /*padding-top:50%;*/
     /*padding-bottom:50%;*/
 }
 #name{
-    position: absolute;
+    /*position: absolute;*/
 }
 #content1{
     top:23%;
-    left:30%;
+    text-align:center;
+    left:8%;
+    /*left:30%;*/
     /*display: block;*/
 }
 #content2{
-    position:absolute;
+    /*position:absolute;*/
     max-width:70%;
-    left:24%;
+    left:15%;
 }
-#content3, #content4, #content5{
+#content3, #content4, #content5, #content6{
     /*padding-top:30%;*/
+    top:14%;
 }
 
 button{
@@ -177,8 +174,6 @@ nav div li a:hover{
     display:inherit;
     max-width:100%;
 }
-
-
 body{
   /*background-image: url('S404ErrorNotFound.jpg')*/
 }
@@ -186,52 +181,26 @@ ul li{
   margin-right:5px;
 }
 ul{
-  /*margin-left:-10px;*/
   overflow: hidden;
-}
-p{
-  padding-left:5%;
 }
 li a {
   font-family: 'Dosis', SansSerif;
   text-decoration: none;
 }
-
 nav div li{
   float:none;
 }
 li{
   float:left;
-  /*border-color: red;*/
   list-style:none;
 }
 
 ul li{
   font-size:18px;
 }
-h2{
-  /*margin-left:1%;*/
-}
-h3{
-  /*margin-left:1.5%;*/
-}
 a{
   display:block;
 }
-.dropdown-content{
-    display:none;
-    position: relative;
-    background-color: #f9f9f9;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-.dropdown-content a{
-  color:black;
-  padding:12px 16px;
-  text-decoration:none;
-  display: block;
-
-}
-
 .show{
     display:block;
 }
@@ -252,10 +221,8 @@ a{
     max-height:10%;
     max-width:250px;
     width: auto;
-    left:42%;
+    left:41%;
 
-    /*margin-left: auto;*/
-    /*margin-right:auto;*/
 }
 #name:hover{
     box-shadow:0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
@@ -300,14 +267,53 @@ div p{
     /*-webkit-animation: fadein 3.5s linear 1 normal forwards;*/
 }
 /*//desktop*/
-@media only screen and (min-width: 40.5em){
-    img#mypic{
+@media only screen and (min-width: 26em){
+    .arrow{
+        left:41%;
+    }
+    .content{
+        /*border:2px solid rgba(0,0,0,0.5);*/
+        /*left:17%;*/
+        /*top:24%;*/
         max-width:60%;
-      }
-      h1{
+        width:60%;
+        text-align:center;
+
+    }
+    #content1{
+        margin-left:auto;
+        margin-right:auto;
+        max-width:270px;
+        text-align:center;
+        margin-top:7%;
+        left:21%;
+    }
+    #content2{
+        position:fixed;
+        margin-top:2%;
+        left:20%;
+    }
+    #content3,#content4,#content5, #content6{
+        position:fixed;
+        margin-left:auto;
+        margin-right:auto;
+        left:20%;
+        top:22%;
+        /*margin-left:9%;*/
+        /*margin-right:20%;*/
+    }
+    div p{
+        text-shadow: 1px 1px 5px #000000;
+        margin-left:auto;
+        margin-right:auto;
+        font-size:1em;
+    }
+    h1{
         color: yellow;
-        }
+          font-size:2em;
+    }
       #name{
+          font-size:2.5em;
           background-color:rgba(0,0,0,0.7);
 
       }
@@ -316,53 +322,125 @@ div p{
       margin-left:0;
     }
     li {
-      /*border: 3px solid red;*/
       font-size: 26px;
     }
     .container{
         width:45%;
     }
     nav div li {
-        /*border: solid yellow 3px;*/
-
     }
 }
+
+@media only screen and (min-width: 762px){
+    .arrow{
+        left:46%;
+    }
+    .content{
+        /*border:2px solid rgba(0,0,0,0.5);*/
+        /*left:17%;*/
+        /*top:24%;*/
+        max-width:60%;
+        width:800px;
+        text-align:center;
+    }
+    #content1{
+        margin-left:auto;
+        margin-right:auto;
+        max-width:600px;
+        text-align:center;
+        margin-top:18%;
+        left:11%;
+    }
+    #content2{
+        position:fixed;
+        margin-top:2%;
+        left:16%;
+        top:27%;
+    }
+    #content3,#content4,#content5, #content6{
+        position:fixed;
+        margin-left:auto;
+        margin-right:auto;
+        left:22%;
+        top:28%;
+        /*margin-left:9%;*/
+        /*margin-right:20%;*/
+    }
+    img#mypic{
+        max-width:60%;
+    }
+    h1{
+        color: red;
+    }
+    #name{
+        background-color:rgba(0,0,0,0.7);
+
+    }
+    body{
+        margin-top:0;
+        margin-left:0;
+    }
+    li {
+        font-size: 26px;
+    }
+}
+
 
 @media only screen and (min-width: 80em){
     .arrow{
         left:49%;
     }
     .content{
-        left:17%;
-        top:24%;
+        /*border:2px solid rgba(0,0,0,0.5);*/
+        /*left:17%;*/
+        /*top:24%;*/
         max-width:60%;
         width:800px;
+        text-align:center;
+
 =    }
     #content1{
-        left:35%;
-        top:29%;
+        margin-left:auto;
+        margin-right:auto;
+        max-width:600px;
+        text-align:center;
+        margin-top:7%;
+        left:29%;
     }
     #content2{
-        left:38%;
+        position:fixed;
+        margin-top:2%;
+        left:20%;
     }
-    #content3,#content4,#content5{
-
-        margin-left:9%;
-        margin-right:20%;
+    #content3,#content4,#content5, #content6{
+        position:fixed;
+        margin-left:auto;
+        margin-right:auto;
+        left:22%;
+        top:28%;
+        /*margin-left:9%;*/
+        /*margin-right:20%;*/
+    }
+    p{
+        padding-left:5%;
+        padding-right:5%;
     }
     #name{
         /*padding-top:7%;*/
         border:3px solid rgba(0,0,0,0.5);
         padding: 26px 47px 27px 47px;
         /*margin-left:25%;*/
-        /*font-size:6em;*/
+        font-size:4em;
         /*padding-right:0;*/
         /*margin-right:23%;*/
         background-color:rgba(0,0,0,0.7);
     }
   h1{
     color:black;
-      margin-left:15%;
+      /*margin-left:15%;*/
+  }
+  address{
+      position:fixed;
   }
   #picture{
       margin-left:auto;
@@ -386,12 +464,14 @@ div p{
       margin-left:0;
     }
     div p{
+        font-size:1.5em;
         text-shadow: 1px 1px 5px #000000;
-
+        margin-left:auto;
+        margin-right:auto;
     }
     .base-container{
       margin-left:5%;
-      margin-right:2.5%;
+      margin-right:5%;
 
     }
     .invisible{

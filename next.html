@@ -4,7 +4,6 @@
 <title>Jonathan Yuen</title>
 <link rev="Made" href="mailto:jlyuen@ics.uci.edu">
 <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
-
 <meta charset="UTF-8" name="viewport" content="width=device-width" author="Jonathan Yuen">
 <link rel="stylesheet" type="text/css"  href="css/port.css" media="screen and (min-width:10.5em)"/>
 <script src="js/jquery-3.1.0.js"></script>
@@ -14,9 +13,9 @@
 <script>
   window.$=$;
   window.jQuery=jQuery;
-$(document).ready(()=>{
-    $("#content1").fadeTo(1300,1);
-});
+  $(document).ready(()=>{
+      $("#content1").fadeTo(1300,1);
+  });
 $(function(){
     var mystate=1;
     $("#down").on('click touchstart', (e)=>{
@@ -26,19 +25,11 @@ $(function(){
             mystate++;
             console.log("fading out..."+ (mystate-1));
             $("#content" + (mystate - 1)).fadeTo(1300,0);
-//            $("#content" + (mystate - 1)).addClass("hidden");
-//            $("#content" + (mystate - 1)).addClass("away");
-//            $("#content" + mystate).addClass("fade");
             $("#content" + (mystate-1)).addClass("hidden");
             changeInfo(mystate);
-//            $("#content" + mystate).removeClass("away");
             console.log("fading in ..."+ (mystate));
             $("#content" + (mystate)).fadeTo(1300,1);
             console.log("fading in complete ..."+ (mystate));
-//            $("#content"+ mystate).css.display=block;
-//            fadeIn(300);
-//            $("#content" + mystate).removeClass("hidden");
-
         }
     });
     $("#up").on('click touchstart', (e)=>{
@@ -51,7 +42,6 @@ $(function(){
 
             $("#content" + (mystate + 1)).addClass("hidden");
             changeInfo(mystate);
-//            $("#content" + mystate).removeClass("hidden");
             $("#content" + (mystate)).fadeTo(1300,1);
 
         }
@@ -81,14 +71,6 @@ body{
 <header>
 
 <nav>
-  <!--<div id="navbar">-->
-  <!--<li><a id="home" href="index.html">Home</a></li>-->
-  <!--<li><a id="tools" href="class_examiner.html">Tools</a></li>-->
-  <!--<li><a id="contact">Contact</a></li>-->
-  <!--<li><a id= "aquafinda" href="waterbottles.html">Aquafinda</a></li>-->
-  <!--<li><a id= "research" href="final_project.html">Research</a></li>-->
-  <!--<li><a id= "next" href="next.html">Portfolio</a></li>-->
-  <!--</div>-->
 </nav>
 </header>
 
@@ -100,7 +82,6 @@ body{
   </div>
 
   <div class="content fade" id="content1">
-  <!--<div class="content hidden" id="content1">-->
       <p id="name">Jonathan Yuen</p>
   </div>
 
@@ -115,19 +96,13 @@ body{
     <p id="about"></p>
   </div>
   <div class="content hidden " id="content4"> </div>
-  <div class="content hidden " id="content5">
+  <div class="content hidden " id="content5"></div>
+  <div class="content hidden" id="content6">
+    <h1>More Projects</h1>
+    <p>This website is just a small taste of some of my work. Click <span id="more"><a href="http://ics.uci.edu/~jlyuen/portfolio.html">here</a></span> to see more!</p>
   </div>
-  <!--<div class="invisible">-->
-
-  <!--</div>-->
-
-
-
-
 </div>
-<div class="content hidden">
 
-</div>
 
 
 
